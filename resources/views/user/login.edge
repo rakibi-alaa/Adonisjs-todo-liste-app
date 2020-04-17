@@ -1,0 +1,35 @@
+@layout('layouts.main')
+
+@section('title')
+Login Page
+@endsection
+
+
+@section('content')
+<h3>Login with your account</h3>
+
+<div class="row">
+    <form class="col s4 center" method="POST" action="{{ route('UserController.login')}}">
+      {{ csrfField() }}
+      <div class="row">
+        <div class="input-field col s6">
+          <i class="material-icons prefix">account_circle</i>
+          <input id="icon_prefix" type="text" name='email' class="validate">
+          <label for="icon_prefix">Email</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s6">
+          <i class="material-icons prefix">lock</i>
+          <input id="icon_telephone" type="password" name='password' class="validate">
+          <label for="icon_telephone">Password</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s6">
+          <button class="btn waves-effect waves-light" type="submit" name="action">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
+@endsection
