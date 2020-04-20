@@ -39,7 +39,7 @@ class User extends Model {
     return this.hasMany('App/Models/Token')
   }
 
-  todoListes () {
+  todolistes () {
     return this.hasMany('App/Models/TodoListe')
   }
 

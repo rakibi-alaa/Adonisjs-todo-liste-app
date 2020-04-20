@@ -4,7 +4,7 @@
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
-const Todoliste = use('App/Models/TodoListe')
+const Todoliste = use('App/Models/Todoliste')
 
 /**
  * Resourceful controller for interacting with todolistes
@@ -44,13 +44,24 @@ class TodolisteController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async store ({ request, response }) {
+  async store ({ request, response ,auth}) {
+
     const {title,description} = request.all();
+
     const todoliste = new Todoliste();
     todoliste.title = title;
     todoliste.description = description;
-    await todoliste.save()
-    return response.redirect('/todoliste');
+    todoliste.active = true;
+    
+    try {
+      await todoliste.save();
+      await todoliste.user().associate(auth.user);
+      return response.redirect('/todoliste');
+    } catch (error) {
+      console.log(error)
+      return view.render('/todoliste/create')
+    }
+    
   }
 
   /**
