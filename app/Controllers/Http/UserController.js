@@ -14,6 +14,10 @@ class UserController {
     return view.render('user/login')
   }
 
+  async show ({ auth,view}) {
+    return view.render('/user/profile',{user : auth.user})
+  }
+
   // redirects to the create account page
   async create ({ auth, request ,view}) {
     return view.render('user/register')
@@ -28,6 +32,7 @@ class UserController {
     try {
       await auth.attempt(email, password)
       return response.redirect('/')
+
     } catch (error) {
       console.log(error)
       return response.redirect('/login')
@@ -46,6 +51,26 @@ class UserController {
       return response.redirect('/signup')
     }
   }
+
+  // register a new user
+  async update({ request, response, auth}) {
+    const { username,email, password } = request.all()
+    try {
+      const user = auth.user
+      user.username = username;
+      user.email = email;
+
+      password ? user.password = password :null
+
+
+    await user.save();
+    return response.redirect('/');
+    } catch (error) {
+      console.log(error)
+      return response.redirect('/profile/edit')
+    }
+  }
+
   // logs out the current logged in user
   async logout ({ response, auth}) {
       await auth.logout()

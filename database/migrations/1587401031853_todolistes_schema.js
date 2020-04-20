@@ -3,22 +3,22 @@
 /** @type {import('@adonisjs/lucid/src/Schema')} */
 const Schema = use('Schema')
 
-class TodoListeSchema extends Schema {
+class TodolistesSchema extends Schema {
   up () {
-    this.create('todo_listes', (table) => {
+    this.create('todolistes', (table) => {
       table.increments()
       table.string('title')
       table.string('description')
       table.boolean('active')
-      table.integer('user_id')
+      table.integer('user_id').unsigned().references('id').inTable('users')
       table.timestamps()
       table.timestamp('deleted_at')
     })
   }
 
   down () {
-    this.drop('todo_listes')
+    this.drop('todolistes')
   }
 }
 
-module.exports = TodoListeSchema
+module.exports = TodolistesSchema

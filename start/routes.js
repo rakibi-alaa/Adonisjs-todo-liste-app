@@ -22,4 +22,12 @@ Route.post('/login', 'UserController.login').as('users.login')
 Route.get('/signup', 'UserController.create')
 Route.post('/signup', 'UserController.register').validator('UserStore');
 Route.get('/logout', 'UserController.logout')
+Route.get('/profile', 'UserController.show')
+Route.post('/profile/edit', 'UserController.update').as('users.editprofile').validator('UserUpdate');
+
+Route.group(() => {
+    Route.get('/', 'TodolisteController.index')
+    Route.get('/create', 'TodolisteController.create').as('todolistes.create')
+    Route.post('/create', 'TodolisteController.store').as('todolistes.store').validator('TodoListeStore');
+}).prefix('todoliste')
 

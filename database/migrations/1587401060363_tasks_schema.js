@@ -3,7 +3,7 @@
 /** @type {import('@adonisjs/lucid/src/Schema')} */
 const Schema = use('Schema')
 
-class TaskSchema extends Schema {
+class TasksSchema extends Schema {
   up () {
     this.create('tasks', (table) => {
       table.increments()
@@ -11,7 +11,7 @@ class TaskSchema extends Schema {
       table.string('description')
       table.boolean('completed')
       table.datetime('scheduled_at')
-      table.integer('todoliste_id')
+      table.integer('todoliste_id').unsigned().references('id').inTable('todolistes')
       table.boolean('urgent')
       table.timestamps()
       table.timestamp('deleted_at')
@@ -23,4 +23,4 @@ class TaskSchema extends Schema {
   }
 }
 
-module.exports = TaskSchema
+module.exports = TasksSchema

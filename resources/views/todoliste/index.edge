@@ -1,0 +1,64 @@
+@layout('layouts.main')
+
+@section('title')
+Todo listes Page
+@endsection
+
+
+@section('content')
+<div class="row">
+    <div class="col s6">
+        <h3>My todo listes</h3>
+    </div>
+    <div class="col s6">
+        <a href="{{ route('todolistes.create')}}" class="waves-effect waves-light btn right"><i class="material-icons right">add</i>New list</a>
+    </div>
+</div>
+
+<div class="container">
+    <table class="centered highlight">
+        <thead>
+          <tr>
+              <th>Title</th>
+              <th>Active</th>
+              <th>Created by</th>
+              <th>Created At</th>
+              <th>Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>Alvin</td>
+            <td>Eclair</td>
+            <td>$0.87</td>
+            <td>$0.87</td>
+            <td>
+                <a class="waves-effect waves-light btn-small" title="edit list"><i class="material-icons">edit</i></a>
+                <a class="waves-effect waves-light btn-small" title="view list"><i class="material-icons">visibility</i></a>
+            </td>
+          </tr>
+          <tr>
+            <td>Alan</td>
+            <td>Jellybean</td>
+            <td>$3.76</td>
+            <td>$3.76</td>
+            <td>
+                <a class="waves-effect waves-light btn-small" title="edit list"><i class="material-icons">edit</i></a>
+                <a class="waves-effect waves-light btn-small" title="view list"><i class="material-icons">visibility</i></a>
+            </td>
+          </tr>
+          <tr>
+            <td>Jonathan</td>
+            <td>Lollipop</td>
+            <td>$7.00</td>
+            <td>$7.00</td>
+            <td>
+                <a class="waves-effect waves-light btn-small" title="edit list"><i class="material-icons">edit</i></a>
+                <a class="waves-effect waves-light btn-small" title="view list"><i class="material-icons">visibility</i></a>
+            </td>
+          </tr>
+        </tbody>
+    </table>
+</div>
+@endsection
