@@ -6,7 +6,7 @@ Todo listes Page
 
 
 @section('content')
-<div class="row">
+<div class="row valign-wrapper">
     <div class="col s6">
         <h3>My todo listes</h3>
     </div>
@@ -28,36 +28,22 @@ Todo listes Page
         </thead>
 
         <tbody>
-          <tr>
-            <td>Alvin</td>
-            <td>Eclair</td>
-            <td>$0.87</td>
-            <td>$0.87</td>
-            <td>
-                <a class="waves-effect waves-light btn-small" title="edit list"><i class="material-icons">edit</i></a>
-                <a class="waves-effect waves-light btn-small" title="view list"><i class="material-icons">visibility</i></a>
-            </td>
-          </tr>
-          <tr>
-            <td>Alan</td>
-            <td>Jellybean</td>
-            <td>$3.76</td>
-            <td>$3.76</td>
-            <td>
-                <a class="waves-effect waves-light btn-small" title="edit list"><i class="material-icons">edit</i></a>
-                <a class="waves-effect waves-light btn-small" title="view list"><i class="material-icons">visibility</i></a>
-            </td>
-          </tr>
-          <tr>
-            <td>Jonathan</td>
-            <td>Lollipop</td>
-            <td>$7.00</td>
-            <td>$7.00</td>
-            <td>
-                <a class="waves-effect waves-light btn-small" title="edit list"><i class="material-icons">edit</i></a>
-                <a class="waves-effect waves-light btn-small" title="view list"><i class="material-icons">visibility</i></a>
-            </td>
-          </tr>
+            @each(todoliste in todolistes)
+               
+                <tr>
+                    <td>{{ todoliste.title }}</td>
+                    <td>
+                        {{ todoliste.active === 0 ? 'non-active':'active' }}
+                    </td>
+                    <td>{{ auth.user.username }}</td>
+                    <td>{{ todoliste.created_at }}</td>
+                    <td>
+                        <a class="waves-effect waves-light btn-small" title="edit list"><i class="material-icons">edit</i></a>
+                        <a href="{{ route('todoliste.show', { id : todoliste.id }) }}" class="waves-effect waves-light btn-small" title="view list"><i class="material-icons">visibility</i></a>
+                    </td>
+                  </tr>
+            @endeach
+        
         </tbody>
     </table>
 </div>

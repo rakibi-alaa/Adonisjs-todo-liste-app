@@ -1,0 +1,45 @@
+@layout('layouts.main')
+
+@section('title')
+{{ todoliste.title }}
+@endsection
+
+
+@section('content')
+<div class="row valign-wrapper">
+    <div class="col s6">
+        <h3>{{ todoliste.title }}</h3>
+    </div>
+    <div class="col s6">
+        <a href="" class="waves-effect waves-light btn right"><i class="material-icons right">add</i>New Task</a>
+    </div>
+</div>
+<div class="row valign-wrapper">
+    <div class="col s4">
+        <h5>{{ todoliste.description }}</h5>
+    </div>
+    <div class="col s8">
+        <div class="container" >
+            <table class="centered highlight">
+                <thead>
+                  <tr>
+                      <th>Title</th>
+                      <th>Active</th>
+                      <th>Created by</th>
+                      <th>Created At</th>
+                      <th>Actions</th>
+                  </tr>
+                </thead>
+        
+                <tbody>
+                    
+                
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+</div>
+
+
+@endsection

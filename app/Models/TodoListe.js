@@ -8,6 +8,11 @@ class Todoliste extends Model {
     static get deleteTimestamp () {
         return 'deleted_at'
     }
+    static castDates (field, value) {
+       
+        return value.calendar()
+       
+    }
 
     user(){
         return this.belongsTo('App/Models/User')

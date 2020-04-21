@@ -19,8 +19,14 @@ class TodolisteController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async index ({ request, response, view }) {
-    return view.render('/todoliste/index')
+  async index ({ request, response, view ,auth}) {
+
+    const todolistes = await auth.user.todolistes().fetch();
+
+    console.log('*************************')
+    console.log(todolistes.toJSON().length)
+
+    return view.render('/todoliste/index',{todolistes : todolistes.toJSON()})
   }
 
   /**
@@ -52,14 +58,18 @@ class TodolisteController {
     todoliste.title = title;
     todoliste.description = description;
     todoliste.active = true;
-    
+
     try {
+
       await todoliste.save();
       await todoliste.user().associate(auth.user);
       return response.redirect('/todoliste');
+
     } catch (error) {
-      console.log(error)
-      return view.render('/todoliste/create')
+
+      console.log(error);
+      return view.render('/todoliste/create');
+
     }
     
   }
@@ -74,6 +84,12 @@ class TodolisteController {
    * @param {View} ctx.view
    */
   async show ({ params, request, response, view }) {
+    const todoliste = await Todoliste.find(params.id)
+    if(todoliste){
+      return view.render('todoliste/show',{todoliste : todoliste.toJSON()})
+    }
+    return response.status(401).send()
+    
   }
 
   /**
