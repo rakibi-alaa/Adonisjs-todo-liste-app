@@ -113,6 +113,15 @@ class TodolisteController {
    * @param {Response} ctx.response
    */
   async update ({ params, request, response }) {
+    const todoliste = await Todoliste.find(params.id);
+    const {title,description,active} = request.all();
+    console.log(request.all())
+    if(todoliste){
+      todoliste.title = title;
+      todoliste.description = description;
+      await todoliste.save();
+    }
+    return response.redirect('/todoliste')
   }
 
   /**
