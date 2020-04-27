@@ -1,0 +1,80 @@
+@layout('layouts.main')
+
+@section('title')
+Todoliste Page
+@endsection
+
+
+@section('content')
+<h3>Create a Todoliste</h3>
+
+
+
+
+  <div class="row ">
+    <form class="col m4 center" method="POST" style="margin-top:50px" action="{{route('todolistes.update',{id : todoliste.id})}}">
+        {{ csrfField() }}
+        <div class="row">
+          <div class="input-field col s12">
+              <input type="text" name="title" value="{{old('title',todoliste.title)}}" class="validate">
+              <label for="disabled">Title</label>
+          </div>
+          @if(hasErrorFor('title'))
+            <div class="row">
+              <div class="col s12 m6">
+                <div class="card blue-grey darken-1">
+                  <div class="card-content white-text">
+                    <p>{{ getErrorFor('title') }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          @endif
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+              <input type="text" name="description" value="{{old('description',todoliste.description)}}" class="validate">
+              <label for="disabled">Description</label>
+          </div>
+          @if(hasErrorFor('description'))
+            <div class="row">
+              <div class="col s12 m6">
+                <div class="card blue-grey darken-1">
+                  <div class="card-content white-text">
+                    <p>{{ getErrorFor('description') }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          @endif
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <select name="active" class="validate">
+              <option value="0" {{ todoliste.active ? 'selected' : '' }}>Active</option>
+              <option value="1" {{ todoliste.active ? '' : 'selected' }}>Non active</option>
+            </select>
+            <label>Active</label>
+          </div>
+          @if(hasErrorFor('active'))
+            <div class="row">
+              <div class="col s12 m6">
+                <div class="card blue-grey darken-1">
+                  <div class="card-content white-text">
+                    <p>{{ getErrorFor('active') }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          @endif
+        </div>
+    
+      
+        <div class="row">
+          <div class="input-field col right">
+            <button class="btn waves-effect waves-light" type="submit" name="action">Save</button>
+          </div>
+        </div>
+    </form>
+  </div>
+@endsection

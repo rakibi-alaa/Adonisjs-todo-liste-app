@@ -83,7 +83,7 @@ class TodolisteController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async show ({ params, request, response, view }) {
+  async show ({ params, response, view }) {
     const todoliste = await Todoliste.find(params.id)
     if(todoliste){
       return view.render('todoliste/show',{todoliste : todoliste.toJSON()})
@@ -101,7 +101,9 @@ class TodolisteController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async edit ({ params, request, response, view }) {
+  async edit ({ params, view }) {
+    const todoliste = await Todoliste.find(params.id);
+   return view.render('/todoliste/edit',{todoliste : todoliste.toJSON()})
   }
 
   /**
@@ -119,6 +121,7 @@ class TodolisteController {
     if(todoliste){
       todoliste.title = title;
       todoliste.description = description;
+      active ? todoliste.active = (active === '0') : null;
       await todoliste.save();
     }
     return response.redirect('/todoliste')

@@ -38,20 +38,20 @@ Todo listes Page
                     <td>{{ auth.user.username }}</td>
                     <td>{{ todoliste.created_at }}</td>
                     <td>
-                        <a class="waves-effect waves-light btn-small modal-trigger" href="#modal{{ todoliste.id}}" title="edit list"><i class="material-icons">edit</i></a>
+                        <a href="{{route('todolistes.edit',{id : todoliste.id})}}" class="waves-effect waves-light btn-small"  title="edit list"><i class="material-icons">edit</i></a>
                         <a href="{{ route('todoliste.show', { id : todoliste.id }) }}" class="waves-effect waves-light btn-small" title="view list"><i class="material-icons">visibility</i></a>
+                        <a href="" class="waves-effect waves-light btn-small" title="view list"><i class="material-icons">delete</i></a>
                     </td>
                     
                 </tr>
-                <tr>
-                    @!component('components.edit_todoliste_modal', csrfField = csrfField , oldData = todoliste )
-                </tr>
+                
                 
             @endeach
         
         </tbody>
     </table>
 
+    
    
 
     

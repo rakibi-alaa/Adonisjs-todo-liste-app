@@ -30,6 +30,7 @@ Route.group(() => {
     Route.get('/create', 'TodolisteController.create').as('todolistes.create')
     Route.post('/create', 'TodolisteController.store').as('todolistes.store').validator('TodoListeStore');
     Route.get('/:id', 'TodolisteController.show').as('todoliste.show');
-    Route.post('/:id/edit', 'TodolisteController.update')
+    Route.get('/:id/edit', 'TodolisteController.edit').as('todolistes.edit')
+    Route.post('/:id/edit', 'TodolisteController.update').as('todolistes.update').validator('TodoListeUpdate');
 }).prefix('todoliste').middleware(['auth'])
 
