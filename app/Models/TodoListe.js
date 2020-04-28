@@ -5,13 +5,14 @@ const Model = use('Model')
 
 class Todoliste extends Model {
     
-    static get deleteTimestamp () {
-        return 'deleted_at'
+    static boot () {
+        super.boot()
+    
+        this.addTrait('@provider:Lucid/SoftDeletes')
     }
+    
     static castDates (field, value) {
-       
-        return value.calendar()
-       
+        return value.calendar();
     }
 
     user(){

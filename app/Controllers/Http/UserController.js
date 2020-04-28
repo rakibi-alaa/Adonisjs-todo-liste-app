@@ -1,6 +1,7 @@
 'use strict'
 
 const User = use('App/Models/User')
+const UserService = use('App/Services/UserService')
 
 class UserController {
   
@@ -53,22 +54,10 @@ class UserController {
   }
 
   // register a new user
-  async update({ request, response, auth}) {
-    const { username,email, password } = request.all()
-    try {
-      const user = auth.user
-      user.username = username;
-      user.email = email;
-
-      password ? user.password = password :null
-
-
-    await user.save();
-    return response.redirect('/');
-    } catch (error) {
-      console.log(error)
-      return response.redirect('/profile/edit')
-    }
+  async update(ctx) {
+    const response = await UserService.update(ctx)
+    if(response) return ctx.response.redirect('/')
+    return ctx.response.redirect('back')
   }
 
   // logs out the current logged in user

@@ -5,6 +5,7 @@
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
 const Todoliste = use('App/Models/Todoliste')
+const TodolisteService = use('App/Services/TodolisteService')
 
 /**
  * Resourceful controller for interacting with todolistes
@@ -19,19 +20,13 @@ class TodolisteController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async index ({ request, response, view ,auth}) {
-
-    const todolistes = await auth.user.todolistes().fetch();
-
-    console.log('*************************')
-    console.log(todolistes.toJSON().length)
-
-    return view.render('/todoliste/index',{todolistes : todolistes.toJSON()})
+  async index ({ view ,auth}) {
+    return view.render('/todoliste/index',{todolistes : await TodolisteService.userTodoListes(auth)})
   }
 
   /**
    * Render a form to be used for creating a new todoliste.
-   * GET todolistes/create
+   * GET todoliste/create
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -44,39 +39,21 @@ class TodolisteController {
 
   /**
    * Create/save a new todoliste.
-   * POST todolistes
+   * POST todoliste
    *
    * @param {object} ctx
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async store ({ request, response ,auth}) {
-
-    const {title,description} = request.all();
-
-    const todoliste = new Todoliste();
-    todoliste.title = title;
-    todoliste.description = description;
-    todoliste.active = true;
-
-    try {
-
-      await todoliste.save();
-      await todoliste.user().associate(auth.user);
-      return response.redirect('/todoliste');
-
-    } catch (error) {
-
-      console.log(error);
-      return view.render('/todoliste/create');
-
-    }
-    
+  async store (ctx) {
+    const response = await TodolisteService.store(ctx);
+    if(response) return ctx.response.redirect('/todoliste'); 
+    return ctx.response.redirect('back'); 
   }
 
   /**
    * Display a single todoliste.
-   * GET todolistes/:id
+   * GET todoliste/:id
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -88,13 +65,12 @@ class TodolisteController {
     if(todoliste){
       return view.render('todoliste/show',{todoliste : todoliste.toJSON()})
     }
-    return response.status(401).send()
-    
+    return response.status(401).send();
   }
 
   /**
    * Render a form to update an existing todoliste.
-   * GET todolistes/:id/edit
+   * GET todoliste/:id/edit
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -108,34 +84,29 @@ class TodolisteController {
 
   /**
    * Update todoliste details.
-   * PUT or PATCH todolistes/:id
+   * PUT or PATCH todoliste/:id
    *
    * @param {object} ctx
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async update ({ params, request, response }) {
-    const todoliste = await Todoliste.find(params.id);
-    const {title,description,active} = request.all();
-    console.log(request.all())
-    if(todoliste){
-      todoliste.title = title;
-      todoliste.description = description;
-      active ? todoliste.active = (active === '0') : null;
-      await todoliste.save();
-    }
-    return response.redirect('/todoliste')
+  async update (ctx) {
+    await TodolisteService.update(ctx);
+    return ctx.response.redirect('/todoliste')
   }
 
   /**
    * Delete a todoliste with id.
-   * DELETE todolistes/:id
+   * DELETE todoliste/:id
    *
    * @param {object} ctx
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async destroy ({ params, request, response }) {
+  async destroy ({ params, response }) {
+    const todoliste = await Todoliste.find(params.id);
+    await todoliste.delete()
+    return response.redirect('back');
   }
 }
 

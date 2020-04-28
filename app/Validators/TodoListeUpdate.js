@@ -4,12 +4,10 @@ class TodoListeUpdate {
   
   get rules () {
 
-    console.log('/////////////////////////')
-    console.log(this.ctx.request.all())
-    console.log('/////////////////////////')
+    const id = this.ctx.params.id;
     
     return {
-      'title': 'required|unique:todolistes,title,id',
+      'title': `required|unique:todolistes,title,id,${id}`,
       'description': 'required',
       'active' : 'required|string'
     }

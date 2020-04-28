@@ -40,7 +40,7 @@ Todo listes Page
                     <td>
                         <a href="{{route('todolistes.edit',{id : todoliste.id})}}" class="waves-effect waves-light btn-small"  title="edit list"><i class="material-icons">edit</i></a>
                         <a href="{{ route('todoliste.show', { id : todoliste.id }) }}" class="waves-effect waves-light btn-small" title="view list"><i class="material-icons">visibility</i></a>
-                        <a href="" class="waves-effect waves-light btn-small" title="view list"><i class="material-icons">delete</i></a>
+                        <a href="{{ route('todoliste.destroy', { id : todoliste.id }) }}" class="waves-effect waves-light btn-small" title="view list"><i class="material-icons">delete</i></a>
                     </td>
                     
                 </tr>

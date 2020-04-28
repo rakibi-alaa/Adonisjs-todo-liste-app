@@ -6,13 +6,13 @@ Todoliste Page
 
 
 @section('content')
-<h3>Create a Todoliste</h3>
+<h3>Update Todoliste</h3>
 
 
 
 
   <div class="row ">
-    <form class="col m4 center" method="POST" style="margin-top:50px" action="{{route('todolistes.update',{id : todoliste.id})}}">
+    <form class="col m4 center" method="post" style="margin-top:50px" action="{{route('todolistes.update',{id : todoliste.id})}}?_method=put">
         {{ csrfField() }}
         <div class="row">
           <div class="input-field col s12">
