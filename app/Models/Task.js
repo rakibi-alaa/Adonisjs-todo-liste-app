@@ -5,8 +5,10 @@ const Model = use('Model')
 
 class Task extends Model {
 
-    static get deleteTimestamp () {
-        return 'deleted_at'
+    static boot () {
+        super.boot()
+    
+        this.addTrait('@provider:Lucid/SoftDeletes')
     }
 
     todoListe(){
