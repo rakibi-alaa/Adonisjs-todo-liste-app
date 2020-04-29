@@ -14,7 +14,7 @@ class UserController {
   async index ({ view}) {
     return view.render('user/login')
   }
-
+  // redirects to the authenticated user profile page
   async show ({ auth,view}) {
     return view.render('/user/profile',{user : auth.user})
   }

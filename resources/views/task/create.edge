@@ -12,11 +12,11 @@ New Task Page
 
 
   <div class="row ">
-    <form class="col m4 center" method="POST" action="{{ route('task.store')}}">
+    <form class="col m4 center" method="POST" action="{{ route('task.store', {id : todoliste_id})}}">
       {{ csrfField() }}
       <div class="row">
         <div class="input-field col s12">
-            <input type="text" name="title" value="{{ old('title','')}}" class="validate">
+            <input type="text" name="title" value="{{ old('title','Title 404000')}}" class="validate">
             <label for="disabled">Title</label>
         </div>
         @if(hasErrorFor('title'))
@@ -33,7 +33,7 @@ New Task Page
       </div>
       <div class="row">
         <div class="input-field col s12">
-            <input type="text" name="description" value="{{ old('description','')}}" class="validate">
+            <input type="text" name="description" value="{{ old('description','djk vbjkvd kjvbjkdsv')}}" class="validate" />
             <label for="disabled">Description</label>
         </div>
         @if(hasErrorFor('description'))
@@ -51,7 +51,7 @@ New Task Page
       <div class="row">
         <div class="input-field col s12">
             <input type="text" class="datepicker" name="scheduled_at" value="{{ old('scheduled_at','')}}" class="validate">
-            <label for="disabled">Scheduled at {{ todoliste_id}}</label>
+            <label for="disabled">Scheduled at</label>
         </div>
         @if(hasErrorFor('scheduled_at'))
           <div class="row">

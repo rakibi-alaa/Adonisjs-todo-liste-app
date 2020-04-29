@@ -6,6 +6,7 @@
 
 const Todoliste = use('App/Models/Todoliste')
 const TodolisteService = use('App/Services/TodolisteService')
+const TaskService = use('App/Services/TaskService')
 
 /**
  * Resourceful controller for interacting with todolistes
@@ -63,7 +64,13 @@ class TodolisteController {
   async show ({ params, response, view }) {
     const todoliste = await Todoliste.find(params.id)
     if(todoliste){
-      return view.render('todoliste/show',{todoliste : todoliste.toJSON()})
+      const tasks = await TaskService.todoListeTasks(todoliste);
+      console.log('tasks.toJSON()')
+      console.log(tasks.toJSON())
+      return view.render('todoliste/show',{
+        todoliste : todoliste.toJSON(),
+        tasks : tasks.toJSON()
+      })
     }
     return response.status(401).send();
   }

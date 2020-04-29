@@ -4,5 +4,5 @@ document.addEventListener('DOMContentLoaded', function() {
     var dateelems = document.querySelectorAll('.datepicker');
     var modalinstances = M.Modal.init(modalelems,{});
     var selectinstances = M.FormSelect.init(selectelems, {});
-    var dateinstances = M.Datepicker.init(dateelems, {});
+    var dateinstances = M.Datepicker.init(dateelems, { format : 'mmmm dd, yyyy' , minDate : new Date()});
   });

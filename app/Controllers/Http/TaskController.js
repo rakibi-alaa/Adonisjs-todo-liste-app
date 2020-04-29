@@ -33,10 +33,7 @@ class TaskController {
    * @param {View} ctx.view
    */
   async create ({ request,params, view }) {
-    console.log('+++++++++++++++++++')
-    console.log(params)
-    console.log('+++++++++++++++++++')
-    return view.render('/task/create')
+    return view.render('/task/create',{todoliste_id : params.id})
   }
 
   /**
@@ -47,7 +44,9 @@ class TaskController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async store ({ request, response }) {
+  async store (ctx) {
+    await TaskService.store(ctx);
+    return ctx.response.route('todoliste.show',{id : ctx.params.id})
   }
 
   /**
