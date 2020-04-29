@@ -32,8 +32,11 @@ class TaskController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async create ({ request, response, view }) {
-    
+  async create ({ request,params, view }) {
+    console.log('+++++++++++++++++++')
+    console.log(params)
+    console.log('+++++++++++++++++++')
+    return view.render('/task/create')
   }
 
   /**
