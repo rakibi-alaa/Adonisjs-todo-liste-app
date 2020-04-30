@@ -7,7 +7,7 @@
 const Todoliste = use('App/Models/Todoliste')
 const TodolisteService = use('App/Services/TodolisteService')
 const TaskService = use('App/Services/TaskService')
-
+const Logger = use('Logger')
 /**
  * Resourceful controller for interacting with todolistes
  */
@@ -22,6 +22,7 @@ class TodolisteController {
    * @param {View} ctx.view
    */
   async index ({ view ,auth}) {
+    Logger.info('======== CHANGE PAGE : MY TODOLISTS =======')
     return view.render('/todoliste/index',{todolistes : await TodolisteService.userTodoListes(auth)})
   }
 

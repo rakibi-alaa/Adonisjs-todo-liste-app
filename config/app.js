@@ -2,7 +2,12 @@
 
 /** @type {import('@adonisjs/framework/src/Env')} */
 const Env = use('Env')
-
+const Helpers = use('Helpers')
+const { format } = require('winston');
+const { combine, timestamp, prettyPrint, colorize, printf, splat, align } = format;
+const myFormat = printf(({ level, message, timestamp }) => {
+  return `${timestamp} ${level}: ${message}`;
+});
 module.exports = {
 
   /*
@@ -188,7 +193,7 @@ module.exports = {
     | Available drivers are: `file` and `console`.
     |
     */
-    transport: 'console',
+    transport: 'file',
 
     /*
     |--------------------------------------------------------------------------
@@ -219,8 +224,16 @@ module.exports = {
     file: {
       driver: 'file',
       name: 'adonis-app',
-      filename: 'adonis.log',
-      level: 'info'
+      filename: Helpers.publicPath('logfs/todoApp.log'),
+      level: 'info',
+       format: combine(
+        align(),
+        splat(),
+        //colorize(),
+        timestamp(),
+        //prettyPrint(),
+        myFormat
+      ) 
     }
   },
 

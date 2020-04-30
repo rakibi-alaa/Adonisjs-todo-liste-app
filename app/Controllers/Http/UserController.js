@@ -2,11 +2,13 @@
 
 const User = use('App/Models/User')
 const UserService = use('App/Services/UserService')
+const Logger = use('Logger')
 
 class UserController {
   
   // redirects to the Welcome page
   async home ({ auth, request ,view}) {
+    Logger.info('======== CHANGE PAGE : WELCOME ======= %s',{username : auth.user.username})
   return view.render('welcome')
   }
 

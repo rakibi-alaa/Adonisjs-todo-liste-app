@@ -8,6 +8,7 @@ tmp
 # Environment variables, never commit this file
 .env
 public/uploads
+public/logfs
 
 # The development sqlite file
 database/*.sqlite
