@@ -96,8 +96,8 @@ class TaskController {
    * @param {Response} ctx.response
    */
   async destroy (ctx) {
-    /* await TaskService.destroy(ctx);
-    return ctx.response.redirect('back') */
+    await TaskService.destroy(ctx);
+    return ctx.response.redirect('back')
   }
 }
 

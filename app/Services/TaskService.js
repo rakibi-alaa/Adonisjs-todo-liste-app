@@ -64,7 +64,7 @@ class TaskService {
         }
     }
 
-    /* static async destroy({ params }){
+    static async destroy({ params }){
         const task = await this.getTask(params.task_id,false);
         try {
             await task.delete();
@@ -73,7 +73,7 @@ class TaskService {
             console.log(error);
             return false;
         }
-    } */
+    }
 
 }
 
