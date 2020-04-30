@@ -65,8 +65,6 @@ class TodolisteController {
     const todoliste = await Todoliste.find(params.id)
     if(todoliste){
       const tasks = await TaskService.todoListeTasks(todoliste);
-      console.log('tasks.toJSON()')
-      console.log(tasks.toJSON())
       return view.render('todoliste/show',{
         todoliste : todoliste.toJSON(),
         tasks : tasks.toJSON()

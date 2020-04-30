@@ -39,8 +39,7 @@ Route.group(() => {
 Route.group(() => {
     Route.get('/create', 'TaskController.create').as('task.create')
     Route.post('/create', 'TaskController.store').as('task.store').validator('TaskStore');
-    /* Route.get('/:id', 'TaskController.show').as('task.show');
-    Route.get('/:id/edit', 'TaskController.edit').as('task.edit')
-    Route.put('/:id/edit', 'TaskController.update').as('task.update').validator('TaskUpdate');
-    Route.get('/:id/delete','TaskController.destroy').as('task.destroy') */
+    Route.get('/:task_id?/edit', 'TaskController.edit').as('task.edit')
+    Route.put('/:task_id?/edit', 'TaskController.update').as('task.update').validator('TaskUpdate');
+    Route.get('/:task_id?/delete','TaskController.destroy').as('task.destroy');
 }).prefix('todoliste/:id?/tasks').middleware(['auth'])

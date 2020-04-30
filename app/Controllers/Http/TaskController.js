@@ -70,7 +70,8 @@ class TaskController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async edit ({ params, request, response, view }) {
+  async edit ({ params, view }) {
+   return view.render('/task/edit',{task : await TaskService.getTask(params.task_id,true)})
   }
 
   /**
@@ -81,7 +82,9 @@ class TaskController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async update ({ params, request, response }) {
+  async update (ctx) {
+    await TaskService.update(ctx);
+    return ctx.response.redirect('/todoliste/'+ ctx.params.id)
   }
 
   /**
@@ -92,7 +95,9 @@ class TaskController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async destroy ({ params, request, response }) {
+  async destroy (ctx) {
+    /* await TaskService.destroy(ctx);
+    return ctx.response.redirect('back') */
   }
 }
 

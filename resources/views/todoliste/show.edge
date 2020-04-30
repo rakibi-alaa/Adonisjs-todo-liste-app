@@ -47,9 +47,9 @@ Todoliste - {{ todoliste.title }}
                             </td>
                             <td>{{ task.created_at }}</td>
                             <td>
-                                <a href="{{route('task.edit',{id : task.id})}}" class="waves-effect waves-light btn-small"  title="edit list"><i class="material-icons">edit</i></a>
-                                <a href="{{ route('task.show', { id : task.id }) }}" class="waves-effect waves-light btn-small" title="view list"><i class="material-icons">visibility</i></a>
-                                <a href="{{ route('task.destroy', { id : task.id }) }}" class="waves-effect waves-light btn-small" title="view list"><i class="material-icons">delete</i></a>
+                                <a href="{{route('task.edit',{id : task.todoliste_id , task_id : task.id})}}" class="waves-effect waves-light btn-small"  title="edit list"><i class="material-icons">edit</i></a>
+                                <a href="{{ route('task.show', { id : task.todoliste_id , task_id : task.id }) }}" class="waves-effect waves-light btn-small" title="view list"><i class="material-icons">visibility</i></a>
+                                <a href="{{ route('task.destroy', { id : task.todoliste_id , task_id : task.id }) }}" class="waves-effect waves-light btn-small" title="view list"><i class="material-icons">delete</i></a>
                             </td>
                         </tr>
                     @endeach
